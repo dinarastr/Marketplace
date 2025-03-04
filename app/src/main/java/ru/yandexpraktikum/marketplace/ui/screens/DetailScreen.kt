@@ -8,8 +8,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import ru.yandexpraktikum.marketplace.R
 import ru.yandexpraktikum.marketplace.model.SampleProducts
 import kotlinx.coroutines.launch
 
@@ -24,6 +27,7 @@ fun DetailScreen(
 
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -31,7 +35,10 @@ fun DetailScreen(
                 title = { Text(text = product.name) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            contentDescription = stringResource(R.string.back)
+                        )
                     }
                 }
             )
@@ -65,7 +72,7 @@ fun DetailScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 
                 Text(
-                    text = "$${String.format("%.2f", product.price)}",
+                    text = stringResource(R.string.price_format, product.price),
                     style = MaterialTheme.typography.titleLarge
                 )
                 
@@ -77,13 +84,13 @@ fun DetailScreen(
                 )
                 
                 Spacer(modifier = Modifier.weight(1f))
-                
+                val price = stringResource(R.string.price_format, product.price)
                 Button(
                     onClick = {
                         scope.launch {
                             snackbarHostState.showSnackbar(
-                                message = "Added to cart",
-                                actionLabel = "Dismiss",
+                                message = context.getString(R.string.added_to_cart, product.name),
+                                actionLabel = price,
                                 duration = SnackbarDuration.Short
                             )
                         }
@@ -92,11 +99,11 @@ fun DetailScreen(
                 ) {
                     Icon(
                         Icons.Default.ShoppingCart,
-                        contentDescription = null,
+                        contentDescription = stringResource(R.string.add_to_cart),
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = "Add to Cart")
+                    Text(text = stringResource(R.string.add_to_cart))
                 }
             }
         }

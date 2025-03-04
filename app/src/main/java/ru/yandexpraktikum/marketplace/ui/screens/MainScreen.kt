@@ -14,9 +14,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import ru.yandexpraktikum.marketplace.R
 import ru.yandexpraktikum.marketplace.model.Product
 import ru.yandexpraktikum.marketplace.model.SampleProducts
 import kotlinx.coroutines.launch
@@ -27,6 +30,7 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
     var searchQuery by remember { mutableStateOf("") }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     val filteredProducts = remember(searchQuery) {
         if (searchQuery.isEmpty()) {
@@ -56,11 +60,14 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
                 active = false,
                 onActiveChange = { },
                 leadingIcon = {
-                    Icon(Icons.Default.Search, contentDescription = null)
+                    Icon(
+                        Icons.Default.Search,
+                        contentDescription = stringResource(R.string.search)
+                    )
                 },
                 placeholder = {
                     Text(
-                        text = "Search products...",
+                        text = stringResource(R.string.search_products),
                         color = Color(0xFFAAAAAA)
                     )
                 },
@@ -82,7 +89,10 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
                         onAddToCart = {
                             scope.launch {
                                 snackbarHostState.showSnackbar(
-                                    message = "${product.name} added to cart",
+                                    message = context.getString(
+                                        R.string.added_to_cart,
+                                        product.name
+                                    ),
                                     duration = SnackbarDuration.Short
                                 )
                             }
@@ -137,22 +147,21 @@ fun ProductCard(
                     )
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
-                        text = "$${String.format("%.2f", product.price)}",
+                        text = stringResource(R.string.price_format, product.price),
                         style = MaterialTheme.typography.bodyMedium,
                         color = Color(0xFFAAAAAA)
                     )
                 }
-                IconButton(
-                    onClick = onAddToCart,
-                    modifier = Modifier.size(8.dp)
-                ) {
-                    Icon(
-                        Icons.Default.ShoppingCart,
-                        contentDescription = "Add to cart",
-                        tint = Color(0xFFAAAAAA),
-                        modifier = Modifier.size(8.dp)
-                    )
-                }
+                Icon(
+                    Icons.Default.ShoppingCart,
+                    contentDescription = stringResource(R.string.add_to_cart),
+                    tint = Color(0xFFAAAAAA),
+                    modifier = Modifier
+                        .clickable {
+                            onAddToCart()
+                        }
+                        .size(8.dp)
+                )
             }
         }
     }
