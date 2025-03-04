@@ -27,14 +27,14 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
     var searchQuery by remember { mutableStateOf("") }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
-    
+
     val filteredProducts = remember(searchQuery) {
         if (searchQuery.isEmpty()) {
             SampleProducts.products
         } else {
             SampleProducts.products.filter { product ->
                 product.name.contains(searchQuery, ignoreCase = true) ||
-                product.description.contains(searchQuery, ignoreCase = true)
+                        product.description.contains(searchQuery, ignoreCase = true)
             }
         }
     }
@@ -56,9 +56,14 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
                 active = false,
                 onActiveChange = { },
                 leadingIcon = {
-                    Icon(Icons.Default.Search, contentDescription = "Search")
+                    Icon(Icons.Default.Search, contentDescription = null)
                 },
-                placeholder = { Text("Search products...") },
+                placeholder = {
+                    Text(
+                        text = "Search products...",
+                        color = Color(0xFFAAAAAA)
+                    )
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
