@@ -101,8 +101,7 @@ fun ProductCard(
     onAddToCart: () -> Unit
 ) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = Modifier.fillMaxWidth()
     ) {
         Column {
             Box(
@@ -120,21 +119,23 @@ fun ProductCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp),
+                    .padding(start = 8.dp, top = 4.dp, bottom = 4.dp, end = 2.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 2.dp)
                 ) {
                     Text(
                         text = product.name,
                         style = MaterialTheme.typography.titleMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        color = Color(0xFFAAAAAA) // Light gray color for reduced contrast
+                        color = Color(0xFFAAAAAA)
                     )
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         text = "$${String.format("%.2f", product.price)}",
                         style = MaterialTheme.typography.bodyMedium,
@@ -143,13 +144,13 @@ fun ProductCard(
                 }
                 IconButton(
                     onClick = onAddToCart,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(8.dp)
                 ) {
                     Icon(
                         Icons.Default.ShoppingCart,
                         contentDescription = "Add to cart",
                         tint = Color(0xFFAAAAAA),
-                        modifier = Modifier.size(12.dp)
+                        modifier = Modifier.size(8.dp)
                     )
                 }
             }
