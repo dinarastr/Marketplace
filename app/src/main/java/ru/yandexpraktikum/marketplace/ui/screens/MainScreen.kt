@@ -161,6 +161,7 @@ fun ProductCard(
                         .clickable {
                             onAddToCart()
                         }
+                        .padding(0.dp)
                         .size(8.dp)
                 )
             }
