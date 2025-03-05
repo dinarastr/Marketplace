@@ -106,12 +106,13 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
 
 @Composable
 fun ProductCard(
+    modifier: Modifier = Modifier,
     product: Product,
     onClick: () -> Unit,
     onAddToCart: () -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         Column {
             Box(

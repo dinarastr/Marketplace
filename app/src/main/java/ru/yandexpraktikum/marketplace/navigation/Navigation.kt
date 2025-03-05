@@ -6,8 +6,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import ru.yandexpraktikum.marketplace.ui.screens.DetailScreen
 import ru.yandexpraktikum.marketplace.ui.screens.MainScreen
+import ru.yandexpraktikum.marketplace.ui.screens.ProductDetailsScreen
 
 @Composable
 fun MarketplaceNavigation(navController: NavHostController) {
@@ -26,7 +26,7 @@ fun MarketplaceNavigation(navController: NavHostController) {
             )
         ) { backStackEntry ->
             val productId = backStackEntry.arguments?.getInt("productId") ?: return@composable
-            DetailScreen(
+            ProductDetailsScreen(
                 productId = productId,
                 onNavigateBack = { navController.popBackStack() }
             )
