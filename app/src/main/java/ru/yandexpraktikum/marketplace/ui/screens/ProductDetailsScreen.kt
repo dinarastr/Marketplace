@@ -86,7 +86,7 @@ fun ProductDetailsScreen(
                 )
                 
                 Spacer(modifier = Modifier.height(16.dp))
-                
+
                 Text(
                     text = product.name,
                     style = MaterialTheme.typography.headlineMedium
@@ -105,8 +105,9 @@ fun ProductDetailsScreen(
                     text = product.description,
                     style = MaterialTheme.typography.bodyLarge
                 )
-                
                 Spacer(modifier = Modifier.weight(1f))
+
+                val buttonDescription = stringResource(R.string.add_product_to_cart, product.name)
                 Button(
                     onClick = {
                         scope.launch {
@@ -117,7 +118,7 @@ fun ProductDetailsScreen(
                         }
                     },
                     modifier = Modifier.fillMaxWidth().semantics {
-                        contentDescription = context.getString(R.string.add_product_to_cart, product.name)
+                        contentDescription = buttonDescription
                     },
                 ) {
                     Icon(

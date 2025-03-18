@@ -28,6 +28,7 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -80,6 +81,7 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
+            val searchBarDescription = stringResource(R.string.searchbar_description)
             SearchBar(
                 query = searchQuery,
                 onQueryChange = { searchQuery = it },
@@ -93,7 +95,6 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
                     )
                 },
                 placeholder = {
-                    val searchBarDescription = stringResource(R.string.searchbar_description)
                     Text(
                         modifier = Modifier.semantics {
                             contentDescription = searchBarDescription
@@ -164,7 +165,7 @@ fun ProductCard(
             ) {
                 AsyncImage(
                     model = product.imageUrl,
-                    contentDescription = product.name,
+                    contentDescription = product.description,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(150.dp),
@@ -205,7 +206,7 @@ fun ProductCard(
                         ) {
                             onAddToCart()
                         }
-                        .padding(12.dp)
+                        .minimumInteractiveComponentSize()
                         .size(24.dp)
                 )
             }
