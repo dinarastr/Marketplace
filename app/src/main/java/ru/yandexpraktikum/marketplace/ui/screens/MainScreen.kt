@@ -143,7 +143,7 @@ fun ProductCard(
     onClick: () -> Unit,
     onAddToCart: () -> Unit
 ) {
-    val actionDescription = stringResource(R.string.add_product_to_cart, product.name)
+    val actionLabel = stringResource(R.string.add_product_to_cart, product.name)
 
     Card(
         modifier = modifier
@@ -151,7 +151,7 @@ fun ProductCard(
             .semantics {
                 customActions = listOf(
                     CustomAccessibilityAction(
-                        label = actionDescription,
+                        label = actionLabel,
                         action = {
                             onAddToCart()
                             true
@@ -197,13 +197,13 @@ fun ProductCard(
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }
-                val addActionLabel = stringResource(R.string.add_product_to_cart, product.name)
+                val actionDescription = stringResource(R.string.add_product_to_cart, product.name)
                 Icon(
                     Icons.Default.ShoppingCart,
                     contentDescription = stringResource(R.string.add_to_cart),
                     modifier = Modifier
                         .clickable(
-                            onClickLabel = addActionLabel
+                            onClickLabel = actionDescription
                         ) {
                             onAddToCart()
                         }
