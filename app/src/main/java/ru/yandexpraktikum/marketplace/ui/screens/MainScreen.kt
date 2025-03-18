@@ -207,7 +207,7 @@ fun ProductCard(
                             onAddToCart()
                         }
                         .minimumInteractiveComponentSize()
-                        .size(24.dp)
+                        .size(16.dp)
                 )
             }
         }
