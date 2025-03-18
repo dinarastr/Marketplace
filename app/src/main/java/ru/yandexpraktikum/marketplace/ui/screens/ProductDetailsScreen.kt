@@ -69,12 +69,16 @@ fun ProductDetailsScreen(
             SnackbarHost(hostState = snackbarHostState)
         }
     ) { paddingValues ->
-        Box(modifier = Modifier.padding(paddingValues)) {
+        Box(modifier = Modifier
+            .padding(paddingValues)
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
-                    .semantics(mergeDescendants = true, properties = {})
+                    .semantics(
+                        mergeDescendants = true
+                    ) {}
             ) {
                 AsyncImage(
                     model = product.imageUrl,
@@ -86,7 +90,7 @@ fun ProductDetailsScreen(
                 )
                 
                 Spacer(modifier = Modifier.height(16.dp))
-
+                
                 Text(
                     text = product.name,
                     style = MaterialTheme.typography.headlineMedium
