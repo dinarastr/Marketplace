@@ -109,6 +109,7 @@ fun ProductDetailsScreen(
                     text = product.description,
                     style = MaterialTheme.typography.bodyLarge
                 )
+                
                 Spacer(modifier = Modifier.weight(1f))
 
                 val buttonDescription = stringResource(R.string.add_product_to_cart, product.name)
